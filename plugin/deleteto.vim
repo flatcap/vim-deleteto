@@ -15,8 +15,8 @@ endfunction
 
 xnoremap <silent> <Plug>DeleteToV :<C-U>call <SID>go(line("'<"),line("'>"))<CR>
 nnoremap <silent> <Plug>DeleteToM :<C-U>set opfunc=<SID>go<CR>g@
-nnoremap <silent> <Plug>DeleteToA call <SID>go(1,line('$'))<CR>
-nnoremap <silent> <Plug>DeleteToL call <SID>go(line('.'),line('.'))<CR>
+nnoremap <silent> <Plug>DeleteToA :<C-U>call <SID>go(1,line('$'))<CR>
+nnoremap <silent> <Plug>DeleteToL :<C-U>call <SID>go(line('.'),line('.'))<CR>
 
 " Four mappings for them command
 "       DeleteToV visual
