@@ -1,6 +1,9 @@
 " deleteto.vim - Delete up to a certain character
-" Maintainer:   Rich Russon (flatcap) <rich@flatcap.org>
-" Version:      0.1
+" Author:       Rich Russon (flatcap) <rich@flatcap.org>
+" Website:      https://flatcap.org
+" Copyright:    2014-2015 Richard Russon
+" License:      GPLv2+
+" Version:      1.0
 
 function! s:go(...)
 	if (a:0 == 2)
@@ -18,7 +21,7 @@ nnoremap <silent> <Plug>DeleteToM :<C-U>set opfunc=<SID>go<CR>g@
 nnoremap <silent> <Plug>DeleteToA :<C-U>call <SID>go(1,line('$'))<CR>
 nnoremap <silent> <Plug>DeleteToL :<C-U>call <SID>go(line('.'),line('.'))<CR>
 
-" Four mappings for them command
+" Four mappings for the commands
 "       DeleteToV visual
 "       DeleteToM motion
 "       DeleteToA all the file

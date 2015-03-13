@@ -1,0 +1,46 @@
+*deleteto.txt*  Plugin for trimming the beginning of lines
+
+Author:  Richard Russon (flatcap) <rich@flatcap.org>
+License: Same terms as Vim itself (see |license|)
+
+This plugin is only available if 'compatible' is not set.
+
+INTRODUCTION                                        	*deleteto*
+
+WHOLE FILE                                          	*dU* *deleteto-file*
+
+Imagine you're working with a list of files:
+>
+  ./deleteto/plugin/deleteto.vim
+  ./deleteto/README.md
+  ./keyword/plugin/keyword.vim
+  ./keyword/README.md
+<
+but you'd like a tidier list without the "./" at the beginning.
+Type: "dU/"
+>
+  deleteto/plugin/deleteto.vim
+  deleteto/README.md
+  keyword/plugin/keyword.vim
+  keyword/README.md
+<
+Type: *dU/* again
+>
+  plugin/deleteto.vim
+  README.md
+  plugin/keyword.vim
+  README.md
+<
+RANGES                                              	*du* *deleteto-ranges*
+
+Normal mode: "du/" works on a line.
+
+Visual mode: "du/" works on range.
+
+ABOUT                                           	*deleteto-about*
+
+Grab the latest version or report a bug on GitHub:
+
+http://github.com/flatcap/vim-deleteto
+
+ vim:tw=78:ts=4:sw=4:et:ft=help:norl:
