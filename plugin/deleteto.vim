@@ -13,7 +13,7 @@ function! s:go(...)
 	endif
 
 	let char = nr2char(getchar())
-	execute start.','.stop.'s!^\([^\'.char.']*\'.char.'\)\{,'.v:count1.'\}'
+	execute start.','.stop.'s!\V\^\(\[^'.char.']\*'.char.'\)\{,'.v:count1.'\}'
 endfunction
 
 xnoremap <silent> <Plug>DeleteToV :<C-U>call <SID>go(line("'<"),line("'>"))<CR>
