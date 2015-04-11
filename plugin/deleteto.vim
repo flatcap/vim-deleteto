@@ -5,6 +5,11 @@
 " License:      Same as vim, see :help license
 " Version:      1.0
 
+if exists("g:loaded_deleteto") || &cp || v:version < 700
+	finish
+endif
+let g:loaded_deleteto = 1
+
 function! s:go(...)
 	if (a:0 == 2)
 		let [start, stop] = [a:1, a:2]
@@ -26,9 +31,11 @@ nnoremap <silent> <Plug>DeleteToL :<C-U>call <SID>go(line('.'),line('.'))<CR>
 "       DeleteToM motion
 "       DeleteToA all the file
 "       DeleteToL line (single)
+if get(g:, 'deleteto_create_mappings', 1)
+	xmap du <plug>DeleteToV
+	nmap du <plug>DeleteToM
+	nmap du <plug>DeleteToL
+	nmap dU <plug>DeleteToA
+endif
 
-xmap du <plug>DeleteToV
-nmap du <plug>DeleteToM
-nmap du <plug>DeleteToL
-nmap dU <plug>DeleteToA
-
+" vim:set noet ts=8 sw=8:
