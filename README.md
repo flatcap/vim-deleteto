@@ -1,4 +1,4 @@
-# vim-deleteto.vim
+# deleteto.vim
 
 DeleteTo creates a set of mappings to trim the beginning of lines.
 
@@ -36,9 +36,8 @@ Visual mode: `du/` works on range.
 
 ## License
 
-Copyright (c) Richard Russon (flatcap).
-Distributed under the same terms as Vim itself.
-See `:help license`.
+Copyright &copy; Richard Russon (flatcap).
+Distributed under the GPLv3 <http://fsf.org/>
 
 ## See also
 
