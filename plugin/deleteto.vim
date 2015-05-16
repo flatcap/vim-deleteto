@@ -33,10 +33,10 @@ function s:set_up_mappings()
 	"       DeleteToM motion
 	"       DeleteToV visual
 	if (get (g:, 'deleteto_create_mappings', 1))
-		nmap dU <Plug>DeleteToA
-		nmap du <Plug>DeleteToL
-		nmap du <Plug>DeleteToM
-		xmap du <Plug>DeleteToV
+		nmap dU  <Plug>DeleteToA
+		nmap duu <Plug>DeleteToL
+		nmap du  <Plug>DeleteToM
+		xmap du  <Plug>DeleteToV
 	endif
 endfunction
 
