@@ -21,7 +21,7 @@ function! s:go (...)
 	execute l:start . ',' . l:stop . 's!\V\^\(\[^' . l:char . ']\*' . l:char . '\)\{,' . v:count1 . '\}'
 endfunction
 
-function s:set_up_mappings()
+function! s:set_up_mappings()
 	nnoremap <silent> <Plug>DeleteToA :<C-U>call <SID>go (1, line ('$'))<CR>
 	nnoremap <silent> <Plug>DeleteToL :<C-U>call <SID>go (line ('.'), line ('.'))<CR>
 	nnoremap <silent> <Plug>DeleteToM :<C-U>set opfunc=<SID>go<CR>g@
