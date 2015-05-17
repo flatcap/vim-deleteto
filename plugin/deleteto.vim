@@ -43,4 +43,3 @@ endfunction
 
 call s:set_up_mappings()
 
-" vim:set noet ts=8 sw=8:
