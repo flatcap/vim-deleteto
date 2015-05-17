@@ -10,6 +10,12 @@ if (exists ('g:loaded_deleteto') || &cp || (v:version < 700))
 endif
 let g:loaded_deleteto = 1
 
+function! s:delete_to (start, stop, count, char)
+	let l:esc_char = escape (a:char, '!\')
+	let l:cmd = a:start . ',' . a:stop . 's!\V\^\(\[^' . l:esc_char . ']\*' . l:esc_char . '\)\{,' . a:count . '\}!!'
+	execute l:cmd
+endfunction
+
 function! s:go (...)
 	if (a:0 == 2)
 		let [l:start, l:stop] = [a:1, a:2]
@@ -18,7 +24,7 @@ function! s:go (...)
 	endif
 
 	let l:char = nr2char (getchar())
-	execute l:start . ',' . l:stop . 's!\V\^\(\[^' . l:char . ']\*' . l:char . '\)\{,' . v:count1 . '\}'
+	call s:delete_to (l:start, l:stop, v:count1, l:char)
 endfunction
 
 function! s:set_up_mappings()
