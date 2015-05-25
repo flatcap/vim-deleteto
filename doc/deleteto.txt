@@ -24,7 +24,7 @@ Type: "dU/"
   keyword/plugin/keyword.vim
   keyword/README.md
 <
-Type: *dU/* again
+Type: "dU/" again
 >
   plugin/deleteto.vim
   README.md
@@ -37,6 +37,16 @@ Normal mode: "du/" works on a line.
 
 Visual mode: "du/" works on range.
 
+COMMAND                                             	*:DeleteTo* *deleteto-command*
+
+To run DeleteTo from command mode:
+>
+  :DeleteTo /
+<
+To run DeleteTo three times:
+>
+  :DeleteTo / 3
+<
 ABOUT                                           	*deleteto-about*
 
 Grab the latest version or report a bug on GitHub:
