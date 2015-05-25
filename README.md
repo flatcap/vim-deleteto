@@ -34,6 +34,20 @@ Normal mode: `du/` works on a line.
 
 Visual mode: `du/` works on range.
 
+### Command
+
+To run DeleteTo from command mode:
+
+```viml
+:DeleteTo /
+```
+
+To run DeleteTo three times:
+
+```viml
+:DeleteTo / 3
+```
+
 ## License
 
 Copyright &copy; Richard Russon (flatcap).
