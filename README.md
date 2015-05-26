@@ -82,7 +82,7 @@ However, DeleteTo will work with any character.
 | :DeleteTo , 4       | Whole file             | Fourth ,                    |
 |                     |                                                      |
 | :argdo DeleteTo / 2 | All args, all lines    | Second /                    |
-| :bufdo DeleteTo |   | All buffers, all lines | First |                     |
+| :bufdo DeleteTo \|  | All buffers, all lines | First \|                    |
 
 ## License
 
