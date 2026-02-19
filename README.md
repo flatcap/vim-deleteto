@@ -67,7 +67,8 @@ The DeleteTo command has the form
 ## Examples
 
 The delimiter will commonly be forward slash, space, comma or tab.
-However, DeleteTo will work with any character.
+However, DeleteTo will work with any character, including multi-byte
+characters.
 
 | Type this           | Works on               | Delete up to this character |
 | ------------------- | ---------------------- | --------------------------- |
