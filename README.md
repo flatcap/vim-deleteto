@@ -7,7 +7,7 @@ DeleteTo reads a character from the user, then deletes from the beginning of the
 DeleteUntil is similar, but deletes up to and **not** including the character.
 This is analogous to Vim's `f` vs `t` motions.
 
-If you have a tab delimited file, "dU<tab>" will delete the first column of data.
+If you have a tab delimited file, `dU<Tab>` will delete the first column of data.
 
 See the Workflow section, below, to see what that means.
 
@@ -25,7 +25,7 @@ Imagine you're working with a list of files:
 ./keyword/README.md
 ```
 
-but you'd like a tidier list without the "./" at the beginning.
+but you'd like a tidier list without the `./` at the beginning.
 Type: `dU/`
 
 ```
@@ -48,12 +48,12 @@ README.md
 
 By default, DeleteTo creates four mappings:
 
-| Type         | To work on     | Calls                 |
-| :----------- | :------------- | :-------------------- |
-| dU           | All lines      | &lt;Plug&gt;DeleteToA |
-| duu          | This line      | &lt;Plug&gt;DeleteToL |
-| du\{motion\} | Motion-defined | &lt;Plug&gt;DeleteToM |
-| \{visual\}du | Visual region  | &lt;Plug&gt;DeleteToV |
+| Type          | To work on     | Calls             |
+| :------------ | :------------- | :---------------- |
+| `dU`          | All lines      | `<Plug>DeleteToA` |
+| `duu`         | This line      | `<Plug>DeleteToL` |
+| `du{motion}`  | Motion-defined | `<Plug>DeleteToM` |
+| `{visual}du`  | Visual region  | `<Plug>DeleteToV` |
 
 You can disable the default mappings with:
 
@@ -64,12 +64,12 @@ let g:deleteto_create_mappings = 0
 DeleteUntil does not create default mappings to avoid conflicts with
 built-in Vim commands.  The following `<Plug>` targets are available:
 
-| Plug target                       | To work on     |
-| :-------------------------------- | :------------- |
-| &lt;Plug&gt;DeleteUntilA          | All lines      |
-| &lt;Plug&gt;DeleteUntilL          | This line      |
-| &lt;Plug&gt;DeleteUntilM          | Motion-defined |
-| &lt;Plug&gt;DeleteUntilV          | Visual region  |
+| Plug target                   | To work on     |
+| :---------------------------- | :------------- |
+| `<Plug>DeleteUntilA`          | All lines      |
+| `<Plug>DeleteUntilL`          | This line      |
+| `<Plug>DeleteUntilM`          | Motion-defined |
+| `<Plug>DeleteUntilV`          | Visual region  |
 
 Suggested mappings (add to your vimrc):
 
@@ -84,8 +84,10 @@ xmap di  <Plug>DeleteUntilV
 
 The commands have the form
 
-  :[range]DeleteTo CHAR [COUNT]
-  :[range]DeleteUntil CHAR [COUNT]
+```viml
+:[range]DeleteTo CHAR [COUNT]
+:[range]DeleteUntil CHAR [COUNT]
+```
 
 DeleteTo deletes including the delimiter character.
 DeleteUntil deletes up to but not including the delimiter character.
@@ -96,30 +98,30 @@ The delimiter will commonly be forward slash, space, comma or tab.
 However, DeleteTo will work with any character, including multi-byte
 characters.
 
-| Type this           | Works on               | Delete up to this character |
-| :------------------ | :--------------------- | :-------------------------- |
-| dU/                 | Whole file             | First /                     |
-| 3dU,                | Whole file             | Third ,                     |
-| 4duu/               | One line               | Fourth /                    |
-| vip2du&lt;tab&gt;   | Visual - paragraph     | Second &lt;tab&gt;          |
-| du9j,               | Motion - 10 lines      | First ,                     |
-|                     |                                                      |
-| :DeleteTo /         | Whole file             | First /                     |
-| :1,20DeleteTo /     | Lines 1-20             | First /                     |
-| :DeleteTo , 4       | Whole file             | Fourth ,                    |
-|                     |                                                      |
-| :argdo DeleteTo / 2 | All args, all lines    | Second /                    |
-| :bufdo DeleteTo \|  | All buffers, all lines | First \|                    |
+| Type this             | Works on               | Delete up to this character |
+| :-------------------- | :--------------------- | :-------------------------- |
+| `dU/`                 | Whole file             | First `/`                   |
+| `3dU,`                | Whole file             | Third `,`                   |
+| `4duu/`               | One line               | Fourth `/`                  |
+| `vip2du<Tab>`         | Visual - paragraph     | Second `<Tab>`              |
+| `du9j,`               | Motion - 10 lines      | First `,`                   |
+|                       |                                                      |
+| `:DeleteTo /`         | Whole file             | First `/`                   |
+| `:1,20DeleteTo /`     | Lines 1-20             | First `/`                   |
+| `:DeleteTo , 4`       | Whole file             | Fourth `,`                  |
+|                       |                                                      |
+| `:argdo DeleteTo / 2` | All args, all lines    | Second `/`                  |
+| `:bufdo DeleteTo |`   | All buffers, all lines | First `|`                   |
 
 ### DeleteUntil (exclusive)
 
 Given the line: `a/b/c/d`
 
-| Command          | Result  | Deleted |
-| :--------------- | :------ | :------ |
-| :DeleteUntil /   | /b/c/d  | a       |
-| :DeleteUntil / 2 | /c/d    | a/b     |
-| :DeleteUntil / 3 | /d      | a/b/c   |
+| Command            | Result    | Deleted  |
+| :----------------- | :-------- | :------- |
+| `:DeleteUntil /`   | `/b/c/d`  | `a`      |
+| `:DeleteUntil / 2` | `/c/d`    | `a/b`    |
+| `:DeleteUntil / 3` | `/d`      | `a/b/c`  |
 
 ## Options
 

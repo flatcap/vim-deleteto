@@ -138,6 +138,6 @@ ABOUT                                                         *deleteto-about*
 
 Grab the latest version or report a bug on GitHub:
 
-http://github.com/flatcap/vim-deleteto
+https://github.com/flatcap/vim-deleteto
 
  vim:tw=78:ts=2:sw=2:et:ft=help:norl:

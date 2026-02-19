@@ -1,9 +1,9 @@
 " deleteto.vim - Delete up to a certain character
 " Author:       Rich Russon (flatcap) <rich@flatcap.org>
 " Website:      https://flatcap.org
-" Copyright:    2014-2015 Richard Russon
+" Copyright:    2014-2026 Richard Russon
 " License:      GPLv3 <http://fsf.org/>
-" Version:      1.2
+" Version:      1.3
 
 if (exists ('g:loaded_deleteto') || &cp || (v:version < 700))
 	finish
