@@ -11,8 +11,9 @@ endif
 let g:loaded_deleteto = 1
 
 function! s:delete_to (start, stop, char, count)
-	let l:esc_char = escape (a:char, '!\')
-	let l:cmd = a:start . ',' . a:stop . 's!\V\^\(\[^' . l:esc_char . ']\*' . l:esc_char . '\)\{,' . a:count . '\}!!'
+	let l:esc_class = escape (a:char, '\^-]')
+	let l:esc_delim = escape (a:char, '!\')
+	let l:cmd = a:start . ',' . a:stop . 's!\V\^\(\[^' . l:esc_class . ']\*' . l:esc_delim . '\)\{,' . a:count . '\}!!'
 	execute l:cmd
 
 	" if vim-repeat is installed (https://github.com/tpope/vim-repeat)
