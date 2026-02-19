@@ -47,6 +47,23 @@ function! s:go (...) abort
 	call s:delete_to (l:start, l:stop, l:char, l:count)
 endfunction
 
+function! s:command (start, stop, ...) abort
+	if a:0 < 1 || a:0 > 2
+		echoerr 'DeleteTo: expected 1 or 2 arguments (CHAR [COUNT])'
+		return
+	endif
+	let l:char = a:1
+	let l:count = 1
+	if a:0 == 2
+		if a:2 !~# '^\d\+$'
+			echoerr 'DeleteTo: COUNT must be a number'
+			return
+		endif
+		let l:count = str2nr(a:2)
+	endif
+	call s:delete_to (a:start, a:stop, l:char, l:count)
+endfunction
+
 function! s:set_up_mappings() abort
 	nnoremap <silent> <Plug>DeleteToA      :<C-U>call <SID>go(1, line ('$'))<CR>
 	nnoremap <silent> <Plug>DeleteToL      :<C-U>call <SID>go(line ('.'), line ('.'))<CR>
@@ -69,7 +86,7 @@ function! s:set_up_mappings() abort
 		endif
 	endif
 
-	command! -range=% -nargs=+ DeleteTo call <SID>go(<line1>, <line2>, <f-args>)
+	command! -range=% -nargs=+ DeleteTo call <SID>command(<line1>, <line2>, <f-args>)
 endfunction
 
 
