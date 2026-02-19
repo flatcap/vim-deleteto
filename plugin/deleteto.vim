@@ -10,6 +10,13 @@ if (exists ('g:loaded_deleteto') || &cp || (v:version < 700))
 endif
 let g:loaded_deleteto = 1
 
+function! s:getchar () abort
+	if exists('*getcharstr')
+		return getcharstr()
+	endif
+	return nr2char (getchar())
+endfunction
+
 function! s:delete_to (start, stop, char, count) abort
 	let l:esc_class = escape (a:char, '\^-]')
 	let l:esc_delim = escape (a:char, '!\')
@@ -29,13 +36,13 @@ function! s:go (...) abort
 		" Motion
 		let l:start = line ("'[")
 		let l:stop  = line ("']")
-		let l:char  = nr2char (getchar())
+		let l:char  = s:getchar()
 		let l:count = v:count1
 	elseif (a:0 == 2)
 		" All, line, visual
 		let l:start = a:1
 		let l:stop  = a:2
-		let l:char  = nr2char (getchar())
+		let l:char  = s:getchar()
 		let l:count = v:count1
 	else
 		" Command
