@@ -85,6 +85,11 @@ characters.
 | :argdo DeleteTo / 2 | All args, all lines    | Second /                    |
 | :bufdo DeleteTo \|  | All buffers, all lines | First \|                    |
 
+## Note
+
+DeleteTo uses `:substitute` internally, so the deleted text is not placed
+into any register.  This differs from Vim's built-in `d` command.
+
 ## License
 
 Copyright &copy; Richard Russon (flatcap).
