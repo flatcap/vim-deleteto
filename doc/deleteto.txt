@@ -58,7 +58,7 @@ By default, DeleteTo creates four mappings:
 You can disable the default mappings with:
 >
   let g:deleteto_create_mappings = 0
->
+<
 COMMAND                                         *:DeleteTo* *deleteto-command*
 
 The DeleteTo command has the form
