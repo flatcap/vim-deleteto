@@ -55,10 +55,18 @@ function! s:set_up_mappings()
 	nnoremap <silent> <Plug>DeleteToRepeat :<C-U>call <SID>delete_to (get(b:, 'dt_start', 1), get(b:, 'dt_stop', line('$')), get(b:, 'dt_char', ''), v:count > 0 ? v:count : get(b:, 'dt_count', 1))<CR>
 
 	if (get (g:, 'deleteto_create_mappings', 1))
-		nmap dU  <Plug>DeleteToA
-		nmap duu <Plug>DeleteToL
-		nmap du  <Plug>DeleteToM
-		xmap du  <Plug>DeleteToV
+		if empty(maparg('dU',  'n'))
+			nnoremap dU  <Plug>DeleteToA
+		endif
+		if empty(maparg('duu', 'n'))
+			nnoremap duu <Plug>DeleteToL
+		endif
+		if empty(maparg('du',  'n'))
+			nnoremap du  <Plug>DeleteToM
+		endif
+		if empty(maparg('du',  'x'))
+			xnoremap du  <Plug>DeleteToV
+		endif
 	endif
 
 	command! -range=% -nargs=+ DeleteTo call <SID>go(<line1>, <line2>, <f-args>)
