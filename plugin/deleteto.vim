@@ -20,6 +20,7 @@ function! s:delete_to (start, stop, char, count)
 	let b:dt_start = a:start
 	let b:dt_stop  = a:stop
 	let b:dt_char  = a:char
+	let b:dt_count = a:count
 	silent! call repeat#set("\<Plug>DeleteToRepeat", a:count)
 endfunction
 
@@ -51,7 +52,7 @@ function! s:set_up_mappings()
 	nnoremap <silent> <Plug>DeleteToL      :<C-U>call <SID>go(line ('.'), line ('.'))<CR>
 	nnoremap <silent> <Plug>DeleteToM      :<C-U>set opfunc=<SID>go<CR>g@
 	xnoremap <silent> <Plug>DeleteToV      :<C-U>call <SID>go(line ("'<"), line ("'>"))<CR>
-	nnoremap <silent> <Plug>DeleteToRepeat :<C-U>call <SID>delete_to (b:dt_start, b:dt_stop, b:dt_char, v:count)<CR>
+	nnoremap <silent> <Plug>DeleteToRepeat :<C-U>call <SID>delete_to (get(b:, 'dt_start', 1), get(b:, 'dt_stop', line('$')), get(b:, 'dt_char', ''), v:count > 0 ? v:count : get(b:, 'dt_count', 1))<CR>
 
 	if (get (g:, 'deleteto_create_mappings', 1))
 		nmap dU  <Plug>DeleteToA
