@@ -10,7 +10,7 @@ if (exists ('g:loaded_deleteto') || &cp || (v:version < 700))
 endif
 let g:loaded_deleteto = 1
 
-function! s:delete_to (start, stop, char, count)
+function! s:delete_to (start, stop, char, count) abort
 	let l:esc_class = escape (a:char, '\^-]')
 	let l:esc_delim = escape (a:char, '!\')
 	let l:cmd = 'keeppatterns ' . a:start . ',' . a:stop . 's!\V\^\(\[^' . l:esc_class . ']\*' . l:esc_delim . '\)\{,' . a:count . '\}!!'
@@ -24,7 +24,7 @@ function! s:delete_to (start, stop, char, count)
 	silent! call repeat#set("\<Plug>DeleteToRepeat", a:count)
 endfunction
 
-function! s:go (...)
+function! s:go (...) abort
 	if (a:0 == 1)
 		" Motion
 		let l:start = line ("'[")
@@ -47,7 +47,7 @@ function! s:go (...)
 	call s:delete_to (l:start, l:stop, l:char, l:count)
 endfunction
 
-function! s:set_up_mappings()
+function! s:set_up_mappings() abort
 	nnoremap <silent> <Plug>DeleteToA      :<C-U>call <SID>go(1, line ('$'))<CR>
 	nnoremap <silent> <Plug>DeleteToL      :<C-U>call <SID>go(line ('.'), line ('.'))<CR>
 	nnoremap <silent> <Plug>DeleteToM      :<C-U>set opfunc=<SID>go<CR>g@
