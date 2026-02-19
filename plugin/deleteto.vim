@@ -30,7 +30,7 @@ function! s:go (...)
 		let l:start = line ("'[")
 		let l:stop  = line ("']")
 		let l:char  = nr2char (getchar())
-		let l:count = 1
+		let l:count = v:count1
 	elseif (a:0 == 2)
 		" All, line, visual
 		let l:start = a:1
