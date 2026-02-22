@@ -120,10 +120,19 @@ DeleteUntil (exclusive):
   :DeleteUntil / 2      Result: /c/d      (deleted "a/b")
   :DeleteUntil / 3      Result: /d        (deleted "a/b/c")
 
-NOTE                                                             *deleteto-note*
+OPTIONS                                                       *deleteto-options*
 
-DeleteTo uses |:substitute| internally, so the deleted text is not placed
-into any register.  This differs from Vim's built-in |d| command.
+                                                              *g:deleteto_yank*
+By default, DeleteTo uses |:substitute| internally, so the deleted text is
+not placed into any register.  This differs from Vim's built-in |d| command.
+
+To yank the deleted text into the unnamed register (|quotequote|), set:
+>
+  let g:deleteto_yank = 1
+<
+This applies to both DeleteTo and DeleteUntil.  The deleted text from all
+affected lines is joined with newlines and placed in the unnamed register,
+so you can paste it with |p|.
 
 ABOUT                                                         *deleteto-about*
 

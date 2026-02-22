@@ -49,7 +49,7 @@ README.md
 By default, DeleteTo creates four mappings:
 
 | Type         | To work on     | Calls                 |
-| ------------ | -------------- | --------------------- |
+| :----------- | :------------- | :-------------------- |
 | dU           | All lines      | &lt;Plug&gt;DeleteToA |
 | duu          | This line      | &lt;Plug&gt;DeleteToL |
 | du\{motion\} | Motion-defined | &lt;Plug&gt;DeleteToM |
@@ -65,7 +65,7 @@ DeleteUntil does not create default mappings to avoid conflicts with
 built-in Vim commands.  The following `<Plug>` targets are available:
 
 | Plug target                       | To work on     |
-| --------------------------------- | -------------- |
+| :-------------------------------- | :------------- |
 | &lt;Plug&gt;DeleteUntilA          | All lines      |
 | &lt;Plug&gt;DeleteUntilL          | This line      |
 | &lt;Plug&gt;DeleteUntilM          | Motion-defined |
@@ -97,7 +97,7 @@ However, DeleteTo will work with any character, including multi-byte
 characters.
 
 | Type this           | Works on               | Delete up to this character |
-| ------------------- | ---------------------- | --------------------------- |
+| :------------------ | :--------------------- | :-------------------------- |
 | dU/                 | Whole file             | First /                     |
 | 3dU,                | Whole file             | Third ,                     |
 | 4duu/               | One line               | Fourth /                    |
@@ -116,19 +116,31 @@ characters.
 Given the line: `a/b/c/d`
 
 | Command          | Result  | Deleted |
-| ---------------- | ------- | ------- |
+| :--------------- | :------ | :------ |
 | :DeleteUntil /   | /b/c/d  | a       |
 | :DeleteUntil / 2 | /c/d    | a/b     |
 | :DeleteUntil / 3 | /d      | a/b/c   |
 
-## Note
+## Options
 
-DeleteTo uses `:substitute` internally, so the deleted text is not placed
-into any register.  This differs from Vim's built-in `d` command.
+### Yank deleted text
+
+By default, DeleteTo uses `:substitute` internally, so the deleted text is
+not placed into any register.  This differs from Vim's built-in `d` command.
+
+To yank the deleted text into the unnamed register, set:
+
+```viml
+let g:deleteto_yank = 1
+```
+
+This applies to both DeleteTo and DeleteUntil.  The deleted text from all
+affected lines is joined with newlines and placed in the unnamed register,
+so you can paste it with `p`.
 
 ## License
 
-Copyright &copy; Richard Russon (flatcap).
+Copyright &copy; 2014-2026 Richard Russon (flatcap).
 Distributed under the GPLv3 <http://fsf.org/>
 
 ## See also

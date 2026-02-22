@@ -17,6 +17,11 @@ function! s:getchar () abort
 	return nr2char (getchar())
 endfunction
 
+function! s:collect (text) abort
+	call add(s:yanked, a:text)
+	return ''
+endfunction
+
 function! s:delete (start, stop, char, count, inclusive) abort
 	let l:esc_class = escape (a:char, '\^-]')
 	let l:esc_delim = escape (a:char, '!\')
@@ -26,8 +31,16 @@ function! s:delete (start, stop, char, count, inclusive) abort
 		let l:cnt = max([0, a:count - 1])
 		let l:pat = '\V\^\(\[^' . l:esc_class . ']\*' . l:esc_delim . '\)\{,' . l:cnt . '\}\[^' . l:esc_class . ']\*\ze' . l:esc_delim
 	endif
-	let l:cmd = 'keeppatterns ' . a:start . ',' . a:stop . 's!' . l:pat . '!!'
+	if get(g:, 'deleteto_yank', 0)
+		let s:yanked = []
+		let l:cmd = 'keeppatterns ' . a:start . ',' . a:stop . 's!' . l:pat . '!\=s:collect(submatch(0))!'
+	else
+		let l:cmd = 'keeppatterns ' . a:start . ',' . a:stop . 's!' . l:pat . '!!'
+	endif
 	execute l:cmd
+	if get(g:, 'deleteto_yank', 0) && !empty(s:yanked)
+		call setreg('"', join(s:yanked, "\n"))
+	endif
 
 	" if vim-repeat is installed (https://github.com/tpope/vim-repeat)
 	let b:dt_start     = a:start
