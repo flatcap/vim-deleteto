@@ -4,6 +4,9 @@
 
 DeleteTo reads a character from the user, then deletes from the beginning of the line up to and including that character.
 
+DeleteUntil is similar, but deletes up to and **not** including the character.
+This is analogous to Vim's `f` vs `t` motions.
+
 If you have a tab delimited file, "dU<tab>" will delete the first column of data.
 
 See the Workflow section, below, to see what that means.
@@ -58,11 +61,34 @@ You can disable the default mappings with:
 let g:deleteto_create_mappings = 0
 ```
 
-## Command
+DeleteUntil does not create default mappings to avoid conflicts with
+built-in Vim commands.  The following `<Plug>` targets are available:
 
-The DeleteTo command has the form
+| Plug target                       | To work on     |
+| --------------------------------- | -------------- |
+| &lt;Plug&gt;DeleteUntilA          | All lines      |
+| &lt;Plug&gt;DeleteUntilL          | This line      |
+| &lt;Plug&gt;DeleteUntilM          | Motion-defined |
+| &lt;Plug&gt;DeleteUntilV          | Visual region  |
+
+Suggested mappings (add to your vimrc):
+
+```viml
+nmap dI  <Plug>DeleteUntilA
+nmap dii <Plug>DeleteUntilL
+nmap di  <Plug>DeleteUntilM
+xmap di  <Plug>DeleteUntilV
+```
+
+## Commands
+
+The commands have the form
 
   :[range]DeleteTo CHAR [COUNT]
+  :[range]DeleteUntil CHAR [COUNT]
+
+DeleteTo deletes including the delimiter character.
+DeleteUntil deletes up to but not including the delimiter character.
 
 ## Examples
 
@@ -84,6 +110,16 @@ characters.
 |                     |                                                      |
 | :argdo DeleteTo / 2 | All args, all lines    | Second /                    |
 | :bufdo DeleteTo \|  | All buffers, all lines | First \|                    |
+
+### DeleteUntil (exclusive)
+
+Given the line: `a/b/c/d`
+
+| Command          | Result  | Deleted |
+| ---------------- | ------- | ------- |
+| :DeleteUntil /   | /b/c/d  | a       |
+| :DeleteUntil / 2 | /c/d    | a/b     |
+| :DeleteUntil / 3 | /d      | a/b/c   |
 
 ## Note
 

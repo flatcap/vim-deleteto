@@ -10,13 +10,16 @@ INTRODUCTION                                                        *deleteto*
 DeleteTo reads a character from the user, then deletes from the beginning of
 the line up to and including that character.
 
+DeleteUntil is similar, but deletes up to and NOT including the character.
+This is analogous to Vim's |f| vs |t| motions.
+
 If you have a tab delimited file, "dU<tab>" will delete the first column of
 data.
 
 See the Workflow section, below, to see what that means.
 
 To improve this plugin, I recommend installing Tim Pope's vim-repeat plugin.
-This allows for easy repeat actions of DeleteTo.
+This allows for easy repeat actions of DeleteTo and DeleteUntil.
 
   https://github.com/tpope/vim-repeat
 
@@ -59,17 +62,39 @@ You can disable the default mappings with:
 >
   let g:deleteto_create_mappings = 0
 <
-COMMAND                                         *:DeleteTo* *deleteto-command*
+                                                        *deleteto-until-mappings*
+DeleteUntil does not create default mappings to avoid conflicts with
+built-in Vim commands.  The following <Plug> targets are available:
+>
+  <Plug>DeleteUntilA      All lines
+  <Plug>DeleteUntilL      This line
+  <Plug>DeleteUntilM      Motion-defined
+  <Plug>DeleteUntilV      Visual region
+<
+Suggested mappings (add to your vimrc):
+>
+  nmap dI  <Plug>DeleteUntilA
+  nmap dii <Plug>DeleteUntilL
+  nmap di  <Plug>DeleteUntilM
+  xmap di  <Plug>DeleteUntilV
+<
+COMMANDS                              *:DeleteTo* *:DeleteUntil* *deleteto-command*
 
-The DeleteTo command has the form
+The commands have the form
 >
   :[range]DeleteTo CHAR [COUNT]
+  :[range]DeleteUntil CHAR [COUNT]
 <
+DeleteTo deletes including the delimiter character.
+DeleteUntil deletes up to but not including the delimiter character.
+
 EXAMPLES                                                   *deleteto-examples*
 
 The delimiter will commonly be forward slash, space, comma or tab.
 However, DeleteTo will work with any character, including multi-byte
 characters.
+
+DeleteTo (inclusive):
 
   Type this           | Works on               | Delete up to this character
   ------------------- | ---------------------- | ---------------------------
@@ -85,6 +110,15 @@ characters.
 
   :argdo DeleteTo / 2 | All args, all lines    | Second /
   :bufdo DeleteTo \|  | All buffers, all lines | First |
+
+                                                  *deleteto-until-examples*
+DeleteUntil (exclusive):
+
+  Given the line:       a/b/c/d
+
+  :DeleteUntil /        Result: /b/c/d    (deleted "a")
+  :DeleteUntil / 2      Result: /c/d      (deleted "a/b")
+  :DeleteUntil / 3      Result: /d        (deleted "a/b/c")
 
 NOTE                                                             *deleteto-note*
 
