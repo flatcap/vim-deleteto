@@ -5,12 +5,12 @@
 " License:      GPLv3 <http://fsf.org/>
 " Version:      1.3
 
-if (exists ('g:loaded_deleteto') || &cp || (v:version < 700))
+if (exists ('g:loaded_deleteto') || &compatible || (v:version < 700))
 	finish
 endif
 let g:loaded_deleteto = 1
 
-function! s:getchar () abort
+function! s:getchar() abort
 	if exists('*getcharstr')
 		return getcharstr()
 	endif
@@ -132,13 +132,13 @@ function! s:command_until (start, stop, ...) abort
 endfunction
 
 function! s:set_up_mappings() abort
-	" DeleteTo mappings (inclusive — delete including the delimiter)
+	" DeleteTo mappings (inclusive - delete including the delimiter)
 	nnoremap <silent> <Plug>DeleteToA      :<C-U>call <SID>go(1, line ('$'))<CR>
 	nnoremap <silent> <Plug>DeleteToL      :<C-U>call <SID>go(line ('.'), line ('.'))<CR>
 	nnoremap <silent> <Plug>DeleteToM      :<C-U>set opfunc=<SID>go<CR>g@
 	xnoremap <silent> <Plug>DeleteToV      :<C-U>call <SID>go(line ("'<"), line ("'>"))<CR>
 
-	" DeleteUntil mappings (exclusive — delete up to but not including the delimiter)
+	" DeleteUntil mappings (exclusive - delete up to but not including the delimiter)
 	nnoremap <silent> <Plug>DeleteUntilA      :<C-U>call <SID>go_until(1, line ('$'))<CR>
 	nnoremap <silent> <Plug>DeleteUntilL      :<C-U>call <SID>go_until(line ('.'), line ('.'))<CR>
 	nnoremap <silent> <Plug>DeleteUntilM      :<C-U>set opfunc=<SID>go_until<CR>g@
